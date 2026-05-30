@@ -1,286 +1,464 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" style="">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gemmaflow — Soluzioni digitali per associazioni</title>
-  <meta name="description" content="Strumenti digitali su misura per associazioni italiane. Gestione soci, contabilità, calendari ed eventi — tutto in un'unica piattaforma." />
-  <meta property="og:title" content="gemmaflow — Soluzioni digitali per associazioni" />
-  <meta property="og:description" content="Strumenti digitali su misura per associazioni italiane." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gemmaflow.it" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://gemmaflow.it" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>gemmaflow — Soluzioni digitali per associazioni italiane</title>
+  <meta name="description" content="Strumenti digitali semplici e su misura per associazioni no-profit. Gestione soci, contabilità, calendari ed eventi con sincronizzazione Google Calendar." />
+  <meta name="google-site-verification" content="Ui-jt5ix6p1hvtHFHtQaEF9cUIx2bPjfozb1fXmid6g" />
+  
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  
+  <script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "surface-container-highest": "#d5e3fd",
+                    "primary-container": "#2563eb",
+                    "on-primary-container": "#eeefff",
+                    "tertiary": "#555550",
+                    "inverse-on-surface": "#ebf1ff",
+                    "primary": "#004ac6",
+                    "secondary-container": "#d4e6e5",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#d5e3fd",
+                    "surface-dim": "#ccdbf4",
+                    "on-surface-variant": "#434655",
+                    "secondary-fixed": "#d4e6e5",
+                    "on-secondary-fixed": "#0e1e1e",
+                    "on-surface": "#0d1c2f",
+                    "tertiary-fixed-dim": "#c9c6c0",
+                    "on-primary-fixed": "#00174b",
+                    "outline": "#737686",
+                    "secondary": "#516161",
+                    "on-tertiary-fixed-variant": "#474742",
+                    "surface-container": "#e6eeff",
+                    "inverse-primary": "#b4c5ff",
+                    "tertiary-container": "#6e6d68",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#b8cac9",
+                    "on-background": "#0d1c2f",
+                    "surface-container-high": "#dde9ff",
+                    "surface": "#f8f9ff",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "outline-variant": "#c3c6d7",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#f3f0e9",
+                    "background": "#f8f9ff",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#233144",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "tertiary-fixed": "#e5e2dc",
+                    "on-tertiary-fixed": "#1c1c18",
+                    "on-secondary-container": "#576867",
+                    "on-secondary-fixed-variant": "#3a4a49",
+                    "surface-tint": "#0053db",
+                    "primary-fixed": "#dbe1ff"
+                },
+                "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+                },
+                "spacing": {
+                    "margin-desktop": "80px",
+                    "unit": "8px",
+                    "section-padding": "120px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px"
+                },
+                "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-bold": ["Inter"]
+                },
+                "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["36px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                }
+            }
+        }
+    }
+  </script>
+  <style>
+    body { background-color: #f8f9ff; }
+    .blob-bg {
+        position: absolute;
+        z-index: -1;
+        filter: blur(80px);
+        opacity: 0.6;
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        animation: morph 8s ease-in-out infinite both alternate;
+    }
+    @keyframes morph {
+        0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+        100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    }
+    .organic-wave {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        line-height: 0;
+        z-index: -1;
+    }
+    .organic-wave svg {
+        width: 100%;
+        height: auto;
+    }
+  </style>
 </head>
-<body>
+<body class="font-body-md text-on-surface antialiased overflow-x-hidden relative">
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="brand">
-        <span class="brand-dot"></span>
-        <span class="brand-name">gemmaflow</span>
+  <!-- TopNavBar -->
+  <header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border border-outline-variant/30 dark:border-outline/20 shadow-sm rounded-full mt-4 mx-auto w-[90%] max-w-7xl sticky top-4 z-50">
+    <nav class="flex justify-between items-center px-8 py-3">
+      <a class="flex items-center" href="#">
+        <!-- Geometric gem and upward flow logo -->
+        <svg class="h-10 w-auto" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M24 6L34 13V27L24 34L14 27V13L24 6Z" fill="none" stroke="url(#gemGrad)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 24C12 24 18 18 24 20C30 22 36 16 36 16" stroke="#2563eb" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M34 14L36 16L34 18" stroke="#2563eb" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="48" y="28" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#0d1c2f" letter-spacing="-0.03em">gemmaflow</text>
+        </svg>
       </a>
-      <div class="nav-links">
-        <a href="#prodotti" class="nav-link">Prodotti</a>
-        <a href="#chi-siamo" class="nav-link">Chi siamo</a>
-        <a href="privacy.html" class="nav-link">Privacy</a>
-        <a href="mailto:info@gemmaflow.it" class="btn btn-sm">Contattaci</a>
+      <div class="hidden md:flex gap-6 items-center">
+        <a class="font-label-bold text-label-bold text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#prodotti">Prodotti</a>
+        <a class="font-label-bold text-label-bold text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#vantaggi">Perché sceglierci</a>
+        <a class="font-label-bold text-label-bold text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#chi-siamo">Chi siamo</a>
+        <a class="font-label-bold text-label-bold text-on-surface-variant dark:text-on-surface-variant/80 hover:text-primary dark:hover:text-primary-fixed transition-colors" href="privacy.html">Privacy Policy</a>
       </div>
-      <button class="nav-burger" id="navBurger" aria-label="Menu">
-        <span></span><span></span>
-      </button>
-    </div>
-    <div class="nav-mobile" id="navMobile">
-      <a href="#prodotti" class="nav-link">Prodotti</a>
-      <a href="#chi-siamo" class="nav-link">Chi siamo</a>
-      <a href="privacy.html" class="nav-link">Privacy</a>
-      <a href="mailto:info@gemmaflow.it" class="btn btn-sm">Contattaci</a>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container">
-      <div class="label">Soluzioni digitali · Made in Italy</div>
-      <h1>Il gestionale che<br /><span class="accent">la tua associazione</span><br />merita.</h1>
-      <p class="hero-sub">Strumenti semplici, moderni e sicuri per gestire soci, contabilità, gruppi ed eventi. Progettati su misura per associazioni italiane.</p>
-      <div class="hero-actions">
-        <a href="#prodotti" class="btn btn-primary">Scopri i prodotti</a>
-        <a href="mailto:info@gemmaflow.it" class="btn btn-outline">Richiedi info</a>
+      <div class="flex gap-4 items-center">
+        <a class="bg-primary text-on-primary font-label-bold text-label-bold px-6 py-2.5 rounded-full hover:bg-primary/90 transition-all text-sm" href="#contatti">Contattaci</a>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span>Gestione soci</span><span class="dot">·</span>
-        <span>Contabilità</span><span class="dot">·</span>
-        <span>Calendario eventi</span><span class="dot">·</span>
-        <span>Notifiche push</span><span class="dot">·</span>
-        <span>Integrazione Google</span><span class="dot">·</span>
-        <span>GDPR compliant</span><span class="dot">·</span>
-        <span>Firebase & Next.js</span><span class="dot">·</span>
-        <span>PWA</span><span class="dot">·</span>
-      </div>
-      <div class="marquee-group" aria-hidden="true">
-        <span>Gestione soci</span><span class="dot">·</span>
-        <span>Contabilità</span><span class="dot">·</span>
-        <span>Calendario eventi</span><span class="dot">·</span>
-        <span>Notifiche push</span><span class="dot">·</span>
-        <span>Integrazione Google</span><span class="dot">·</span>
-        <span>GDPR compliant</span><span class="dot">·</span>
-        <span>Firebase & Next.js</span><span class="dot">·</span>
-        <span>PWA</span><span class="dot">·</span>
-      </div>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-section-padding px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto flex flex-col items-center text-center">
+    <!-- Abstract Background Blobs -->
+    <div class="blob-bg bg-[#eff6ff] w-96 h-96 top-0 left-10"></div>
+    <div class="blob-bg bg-[#d1fae5] w-[500px] h-[500px] top-20 right-[-100px]"></div>
+    <div class="blob-bg bg-[#fefce8] w-[400px] h-[400px] bottom-0 left-[20%]"></div>
+    
+    <h1 class="font-headline-xl text-headline-xl text-on-surface max-w-4xl mb-6 relative z-10">
+      Il gestionale che accoglie la tua associazione
+    </h1>
+    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12 relative z-10">
+      Offriamo soluzioni digitali su misura per ogni realtà associativa e no-profit italiana, con un approccio moderno basato sulla massima semplicità e trasparenza.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 relative z-10">
+      <a class="bg-primary text-on-primary font-label-bold text-label-bold px-8 py-4 rounded-full hover:bg-primary/90 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5" href="#prodotti">Scopri i prodotti</a>
+      <a class="bg-white text-on-surface border border-outline-variant/60 font-label-bold text-label-bold px-8 py-4 rounded-full hover:bg-surface-container-low transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5" href="#contatti">Parlaci del tuo progetto</a>
     </div>
+    
+    <div class="mt-20 w-full max-w-5xl relative z-10">
+      <img alt="A clean, professional and warm photograph of a diverse group of people collaborating around a table in a modern, soft-lit office." class="w-full h-auto rounded-3xl object-cover shadow-2xl border border-outline-variant/20 aspect-[21/9]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzfopdL4R27-q7zTeJ67thVbSuCDF2HtGPyrz0B4tTU1fr8pIbH6OLAl5pqVGSXtnGH7meq6DPdBrq98GOo2Ti0YtYtcsx4BYJikdNwktacG-Nfkcln9OdD4wpR5SgNp_WtfLoKenzFKyCgsOspXmh5zYnxeNDSGSRUmTnq7baq7BJytClTFlI6-S-6AtS3if0a_Bx3Hz_uFo7GXp3xrJatgCpGj4IsPiMUJPjanTAfmSExzln_V5PvRCAWv3f3ZR0IOZh7xsmzEQ"/>
+    </div>
+  </section>
+
+  <!-- Wave separator -->
+  <div class="organic-wave -mt-32">
+    <svg viewbox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,165.3C960,149,1056,171,1152,186.7C1248,203,1344,213,1392,218.7L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="#eff4ff" fill-opacity="1"></path>
+    </svg>
   </div>
 
-  <!-- PRODUCTS -->
-  <section class="section" id="prodotti">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">I nostri prodotti</div>
-        <h2>Un'app per ogni<br /><span class="accent">associazione</span></h2>
-        <p class="section-sub">Ogni organizzazione è unica. Ogni soluzione è costruita su misura.</p>
+  <!-- Project Showcase / Products -->
+  <section class="py-section-padding px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto relative z-10 bg-[#eff4ff] rounded-[60px] mb-24" id="prodotti">
+    <div class="text-center mb-16">
+      <span class="bg-primary-container text-on-primary-container px-4 py-1.5 rounded-full text-xs font-bold font-label-bold uppercase tracking-wider">Le nostre applicazioni</span>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface mt-4">Un'app per ogni associazione</h2>
+      <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mt-2">Ogni organizzazione ha flussi di lavoro unici. Progettiamo soluzioni mirate per le tue reali necessità.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+      <!-- AC CHIARI (Active App) -->
+      <div class="bg-surface p-10 rounded-[40px] border-2 border-primary-container flex flex-col gap-6 shadow-lg hover:shadow-xl transition-shadow relative overflow-hidden">
+        <div class="flex justify-between items-center">
+          <span class="bg-[#d1fae5] text-[#065f46] px-4 py-1.5 rounded-full text-xs font-bold font-label-bold uppercase tracking-wider">● Attiva</span>
+          <div class="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold text-lg font-label-bold">AC</div>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface">AC Chiari</h3>
+        <p class="font-label-bold text-xs uppercase tracking-wider text-primary/80 -mt-2">Azione Cattolica di Chiari</p>
+        <p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+          Piattaforma gestionale completa per l'associazione AC Chiari. Semplifica l'anagrafica dei soci, le quote associative, la contabilità interna dei gruppi e la pianificazione di attività ed eventi con Google Calendar.
+        </p>
+        <ul class="space-y-3 font-body-md text-body-md text-on-surface-variant my-4">
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            Gestione soci e nuclei familiari
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            Contabilità interna e quote associative
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            Integrazione sicura con Google Calendar
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-xl">check_circle</span>
+            Progressive Web App installabile (PWA)
+          </li>
+        </ul>
+        <a class="bg-primary text-on-primary font-label-bold text-label-bold text-center px-8 py-4 rounded-full hover:bg-primary/90 transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5" href="https://acchiari.gemmaflow.it" target="_blank" rel="noopener">
+          Vai all'applicazione →
+        </a>
       </div>
-
-      <div class="products-grid">
-
-        <!-- AC CHIARI -->
-        <article class="product-card product-card--featured">
-          <div class="product-card-header">
-            <div class="product-badge product-badge--live">● Attivo</div>
-            <div class="product-icon product-icon--blue">AC</div>
-          </div>
-          <h3 class="product-name">AC Chiari</h3>
-          <p class="product-org">Azione Cattolica di Chiari</p>
-          <p class="product-desc">
-            Piattaforma gestionale completa per l'associazione AC Chiari: anagrafica soci, contabilità interna, gestione gruppi, calendario eventi con Google Calendar e notifiche push.
-          </p>
-          <ul class="product-features">
-            <li>
-              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Gestione soci e nuclei familiari
-            </li>
-            <li>
-              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Contabilità e quote associative
-            </li>
-            <li>
-              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Sincronizzazione Google Calendar
-            </li>
-            <li>
-              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="currentColor"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              App installabile (PWA)
-            </li>
-          </ul>
-          <a href="https://acchiari.gemmaflow.it" class="btn btn-primary btn-full" target="_blank" rel="noopener">
-            Vai all'applicazione →
-          </a>
-        </article>
-
-        <!-- PLACEHOLDER -->
-        <article class="product-card product-card--coming">
-          <div class="product-card-header">
-            <div class="product-badge product-badge--soon">In arrivo</div>
-            <div class="product-icon product-icon--gray">?</div>
-          </div>
-          <h3 class="product-name">Prossimamente</h3>
-          <p class="product-org">Nuova associazione</p>
-          <p class="product-desc">
-            Stai cercando una soluzione digitale per la tua associazione? Contattaci per scoprire come possiamo aiutarti a digitalizzare la gestione.
-          </p>
-          <a href="mailto:info@gemmaflow.it" class="btn btn-outline btn-full">
-            Richiedi la tua piattaforma
-          </a>
-        </article>
-
+      
+      <!-- PLACEHOLDER (Soon) -->
+      <div class="bg-surface/50 p-10 rounded-[40px] border border-outline-variant/30 flex flex-col gap-6 shadow-md hover:shadow-lg transition-shadow relative">
+        <div class="flex justify-between items-center">
+          <span class="bg-surface-container-highest text-on-surface-variant px-4 py-1.5 rounded-full text-xs font-bold font-label-bold uppercase tracking-wider">In arrivo</span>
+          <div class="w-12 h-12 bg-surface-container text-on-surface-variant rounded-full flex items-center justify-center font-bold text-lg font-label-bold">?</div>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface opacity-80">Nuova associazione</h3>
+        <p class="font-label-bold text-xs uppercase tracking-wider text-on-surface-variant/60 -mt-2">Prossimamente</p>
+        <p class="font-body-md text-body-md text-on-surface-variant/80 flex-grow">
+          Stai cercando una soluzione digitale moderna per la tua associazione no-profit o di volontariato? Contattaci per scoprire come possiamo cucirti addosso la tua nuova piattaforma gestionale.
+        </p>
+        <a class="border border-outline text-on-surface font-label-bold text-label-bold text-center px-8 py-4 rounded-full hover:bg-surface-container transition-all" href="#contatti">
+          Richiedi la tua piattaforma
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- BENTO FEATURES -->
-  <section class="section section--gray" id="funzionalita">
-    <div class="container">
-      <div class="section-header">
-        <div class="label">Perché sceglierci</div>
-        <h2>Tutto quello che<br />un'associazione <span class="accent">necessita</span></h2>
-      </div>
-
-      <div class="bento-grid">
-        <div class="bento-card bento-card--dark bento-card--wide">
-          <div class="bento-emoji">🔐</div>
-          <h3>Sicuro e conforme GDPR</h3>
-          <p>Autenticazione Google, ruoli differenziati e protezione dei dati secondo il Regolamento europeo sulla privacy. I dati restano tuoi.</p>
+  <!-- Visual Mockups Showcase -->
+  <section class="py-section-padding relative overflow-hidden bg-transparent">
+    <div class="blob-bg bg-[#fefce8] w-[600px] h-[600px] top-1/4 right-[-200px]"></div>
+    <div class="blob-bg bg-[#eff6ff] w-[400px] h-[400px] bottom-10 left-[-100px]"></div>
+    <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
+      <h2 class="font-headline-lg text-headline-lg text-on-surface mb-16">Esempi di interfacce gestionali</h2>
+      <div class="flex flex-col md:flex-row justify-center items-center gap-12 mt-12">
+        <!-- Phone 1 -->
+        <div class="w-64 h-[500px] bg-surface rounded-[50px] border-8 border-surface p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:-rotate-6 hover:rotate-0 hover:-translate-y-6 transition-all duration-500">
+          <div class="w-full h-full bg-surface-container rounded-[36px] overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9DAsNkHPBIcAqWv9TvlGIr5NiEDh2UoogBCRtTsfk2-AATkHRkgEUmiF01hfRF83qslSkLCDfejc300YTn9MJHJ7VSiTfpWt0aDEz9f0--7DQSwyOe4aDazHNuK_JwlKo_0Pzy4mfZQcpUROs6jJdPzcWSiLbNOcy1R-D5XD7RU7fdeHFYjEK15gMzAj0EGFzs4jgoS8kyQzeyni9w8By4gcptZ3gQeLn6M8nDh3Ho89R8u94R7PMql79f8FxlQf4rO8iTytYskw"/>
+          </div>
         </div>
-        <div class="bento-card">
-          <div class="bento-emoji">📱</div>
-          <h3>Funziona su tutto</h3>
-          <p>Web app installabile come app nativa su iPhone e Android. Nessuno store, nessun aggiornamento manuale.</p>
+        <!-- Phone 2 -->
+        <div class="w-72 h-[550px] bg-surface rounded-[50px] border-8 border-surface p-2 shadow-2xl flex flex-col relative overflow-hidden z-10 transform hover:-translate-y-8 transition-all duration-500">
+          <div class="w-full h-full bg-surface-container rounded-[36px] overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQmtDPLj7eXQoAIZhE04L2BWoMgizIVhCvWwzlZEKwu9pMsRzQAoom030gV8mqhKCDMNU-a1osR1OoLW6_3TwyCGsyvJSUsy3pUkEm1Ubx4JWJmYSoPg6pnMEQhUiirUUOopcmzHuUuS6oMyoeLVupsjKRhyu6-CiryhaiwWQy9yGEDD6uItoTr1k9hsqHHU66KYd2Qhv1GAgfHBoqpiuVCTC9yiG3Jwo0mblUk0nFgDeQaTZ6jAt57yu6Nd31HFoyq4LiXccBSes"/>
+          </div>
         </div>
-        <div class="bento-card">
-          <div class="bento-emoji">⚡</div>
-          <h3>Rapido e affidabile</h3>
-          <p>Hosting su Firebase con ridondanza globale. Tempi di risposta inferiori al secondo, anche con centinaia di utenti.</p>
-        </div>
-        <div class="bento-card">
-          <div class="bento-emoji">🔔</div>
-          <h3>Notifiche in tempo reale</h3>
-          <p>Push notification per eventi, scadenze e comunicazioni interne. I soci restano sempre aggiornati.</p>
-        </div>
-        <div class="bento-card bento-card--blue">
-          <div class="bento-emoji">📅</div>
-          <h3>Google Calendar integrato</h3>
-          <p>Gli eventi dell'associazione vengono aggiunti automaticamente al calendario personale dell'utente, con un solo clic di consenso.</p>
+        <!-- Phone 3 -->
+        <div class="w-64 h-[500px] bg-surface rounded-[50px] border-8 border-surface p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:rotate-6 hover:rotate-0 hover:-translate-y-6 transition-all duration-500">
+          <div class="w-full h-full bg-surface-container rounded-[36px] overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzako-6Cr2bNQqNL96GWSLVsyymOAMBqonb_4rFxgzEcVgbRsR2XrcPwYeaUZOGZOZaTicrryYXR8D5UgwTq_Ztnusce89vgzjo7qMCyCSidhIf-URnR19HV60eZtY6io5xrFDv2dkcJZFJNnzRrqxh6yi9KHTKRFLeJnuC1INHuiTRrKphfHZL_FPu8hKWFx7ziL_bcpUbvQP0-siYtEERCsRxy7ZOsVpra5GUw6U1WZG1e90rukEmEFn2sLNR9sbFznsaiACg-E"/>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CHI SIAMO -->
-  <section class="section" id="chi-siamo">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text">
-          <div class="label">Chi siamo</div>
-          <h2>Software artigianale<br />per il <span class="accent">terzo settore</span></h2>
-          <p>
+  <!-- Features Bento Grid -->
+  <section class="py-section-padding px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto relative z-10" id="vantaggi">
+    <div class="text-center mb-16">
+      <span class="bg-[#d1fae5] text-[#065f46] px-4 py-1.5 rounded-full text-xs font-bold font-label-bold uppercase tracking-wider">Perché gemmaflow</span>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface mt-4">Tutto quello che serve per fiorire</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-[#d1fae5]/30 rounded-[40px] p-10 flex flex-col h-full border border-secondary/10 hover:shadow-lg transition-shadow backdrop-blur-sm">
+        <div class="w-20 h-20 bg-surface rounded-full flex items-center justify-center mb-8 shadow-sm">
+          <span class="material-symbols-outlined text-secondary" style="font-size: 36px;">favorite</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-4">Semplice da usare</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+          Un'interfaccia intuitiva pensata per chi non ha particolari competenze tecniche. Tutto è a portata di clic, con un design pulito, moderno e confortevole.
+        </p>
+      </div>
+      
+      <!-- Card 2 (Google Integration Specifics for OAuth) -->
+      <div class="bg-[#eff6ff]/50 rounded-[40px] p-10 flex flex-col h-full border border-primary/10 hover:shadow-lg transition-shadow backdrop-blur-sm">
+        <div class="w-20 h-20 bg-surface rounded-full flex items-center justify-center mb-8 shadow-sm">
+          <span class="material-symbols-outlined text-primary" style="font-size: 36px;">calendar_today</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-4">Google Calendar Integrato</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+          L'applicazione AC Chiari sincronizza gli eventi e gli incontri dell'associazione direttamente nel calendario Google personale dei soci iscritti, solo dopo esplicito consenso tramite schermata OAuth sicura. L'uso dei dati segue rigorosamente le norme di privacy stabilite dal GDPR e non vendiamo o condividiamo in alcun modo le tue informazioni.
+        </p>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="bg-[#fefce8]/50 rounded-[40px] p-10 flex flex-col h-full border border-tertiary/10 hover:shadow-lg transition-shadow backdrop-blur-sm">
+        <div class="w-20 h-20 bg-surface rounded-full flex items-center justify-center mb-8 shadow-sm">
+          <span class="material-symbols-outlined text-tertiary" style="font-size: 36px;">devices</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-4">App e Siti Custom</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+          Crea spazi digitali su misura per la tua associazione. Le nostre soluzioni sono Progressive Web App (PWA) che puoi installare come normali applicazioni su dispositivi Apple e Android senza passare per gli store.
+        </p>
+      </div>
+      
+      <!-- Card 4 -->
+      <div class="bg-[#eff4ff]/50 rounded-[40px] p-10 flex flex-col h-full border border-outline-variant/30 hover:shadow-lg transition-shadow backdrop-blur-sm">
+        <div class="w-20 h-20 bg-surface rounded-full flex items-center justify-center mb-8 shadow-sm">
+          <span class="material-symbols-outlined text-[#0053db]" style="font-size: 36px;">savings</span>
+        </div>
+        <h3 class="font-headline-md text-headline-md text-on-surface mb-4">Costi Ottimizzati</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+          Hosting gratuito ed efficiente. Utilizzare un singolo dominio ombrello come gemmaflow.it ti permette di collegare più gestionali associativi e abbattere drasticamente i costi annuali di gestione e manutenzione tecnica.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chi Siamo -->
+  <section class="py-section-padding px-margin-mobile md:px-margin-desktop max-w-7xl mx-auto relative z-10" id="chi-siamo">
+    <div class="bg-[#f8f9ff] border border-outline-variant/30 rounded-[50px] p-12 md:p-20 shadow-md">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <span class="text-primary font-label-bold text-label-bold uppercase tracking-wider">Chi siamo</span>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">Software artigianale per il terzo settore</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant">
             Siamo uno sviluppatore indipendente italiano specializzato nella realizzazione di piattaforme gestionali per associazioni, parrocchie e organizzazioni no-profit.
           </p>
-          <p>
-            Non vendiamo software generico. Ogni piattaforma viene progettata e sviluppata su misura, tenendo conto delle reali esigenze dell'organizzazione. I prezzi sono pensati per il non-profit.
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Non offriamo software generico o scatole chiuse: ogni piattaforma viene cucita sulle reali necessità e sui flussi della tua associazione, garantendo un'interfaccia accogliente ed accessibile anche per i soci meno tecnologici.
           </p>
-          <div class="about-contact">
-            <a href="mailto:info@gemmaflow.it" class="btn btn-primary">Scrivici</a>
-            <span class="contact-note">Risposta entro 24 ore</span>
+          <div class="flex items-center gap-4 mt-4">
+            <a class="bg-primary text-on-primary font-label-bold text-label-bold px-8 py-4 rounded-full hover:bg-primary/90 transition-all shadow-sm" href="#contatti">Contattaci</a>
+            <span class="text-sm text-on-surface-variant font-label-bold">Risposta entro 24 ore</span>
           </div>
         </div>
-        <div class="about-card">
-          <div class="about-stat">
-            <span class="about-stat-n">1</span>
-            <span class="about-stat-l">App attiva</span>
+        <div class="lg:col-span-5 bg-white p-8 rounded-[40px] border border-outline-variant/30 shadow-sm flex flex-col gap-8">
+          <div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+            <span class="text-2xl font-bold font-headline-md text-primary">1</span>
+            <span class="text-sm font-label-bold text-on-surface-variant uppercase tracking-wider">App attiva</span>
           </div>
-          <div class="about-stat">
-            <span class="about-stat-n">150+</span>
-            <span class="about-stat-l">Soci gestiti</span>
+          <div class="flex items-center justify-between border-b border-outline-variant/20 pb-4">
+            <span class="text-2xl font-bold font-headline-md text-primary">150+</span>
+            <span class="text-sm font-label-bold text-on-surface-variant uppercase tracking-wider">Soci gestiti</span>
           </div>
-          <div class="about-stat">
-            <span class="about-stat-n">100%</span>
-            <span class="about-stat-l">GDPR compliant</span>
+          <div class="flex items-center justify-between pb-2">
+            <span class="text-2xl font-bold font-headline-md text-primary">100%</span>
+            <span class="text-sm font-label-bold text-on-surface-variant uppercase tracking-wider">GDPR compliant</span>
           </div>
-          <div class="about-divider"></div>
-          <p class="about-quote">"Ogni associazione merita strumenti digitali semplici, moderni e accessibili."</p>
+          <div class="bg-surface p-4 rounded-2xl border border-outline-variant/20">
+            <p class="text-sm italic text-on-surface-variant font-body-md">"Ogni associazione merita strumenti digitali semplici, moderni e accessibili."</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="section section--cta">
-    <div class="container cta-inner">
-      <div class="label">Inizia oggi</div>
-      <h2>La tua associazione<br />merita di meglio.</h2>
-      <p>Contattaci per una consulenza gratuita. Analizziamo insieme le tue esigenze e ti proponiamo una soluzione su misura.</p>
-      <a href="mailto:info@gemmaflow.it" class="btn btn-white btn-lg">Richiedi una demo gratuita →</a>
+  <!-- Wave separator before CTA -->
+  <div class="organic-wave -mb-10 relative z-0">
+    <svg viewbox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,128L60,149.3C120,171,240,213,360,208C480,203,600,149,720,144C840,139,960,181,1080,202.7C1200,224,1320,224,1380,224L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" fill="#233144" fill-opacity="1"></path>
+    </svg>
+  </div>
+
+  <!-- CTA / Contact Section -->
+  <section class="px-margin-mobile md:px-margin-desktop w-full mx-auto pb-24 bg-inverse-surface relative z-10 pt-10" id="contatti">
+    <div class="max-w-6xl mx-auto rounded-[80px] p-16 md:p-24 text-center relative overflow-hidden bg-white/5 border border-white/10 backdrop-blur-lg">
+      <!-- Decorative circles -->
+      <div class="absolute top-0 right-0 w-80 h-80 bg-primary/30 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 mix-blend-screen"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#d1fae5]/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/3 mix-blend-screen"></div>
+      
+      <div class="relative z-10">
+        <span class="bg-white/10 text-inverse-on-surface px-4 py-1.5 rounded-full text-xs font-bold font-label-bold uppercase tracking-wider">Parliamo del tuo progetto</span>
+        <h2 class="font-headline-xl text-headline-xl text-inverse-on-surface mt-6 mb-8">
+          Inizia a far fiorire la tua associazione
+        </h2>
+        
+        <!-- Netlify or direct mail submit form -->
+        <form class="mt-10 max-w-xl mx-auto text-left space-y-6 bg-surface/5 p-10 rounded-[60px] backdrop-blur-md border border-white/10 shadow-2xl" action="mailto:info@gemmaflow.it" method="post" enctype="text/plain">
+          <div>
+            <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Nome e Cognome</label>
+            <input name="Nome" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Il tuo nome" type="text"/>
+          </div>
+          <div>
+            <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Indirizzo Email</label>
+            <input name="Email" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="latua@email.com" type="email"/>
+          </div>
+          <div>
+            <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Descrivi la tua associazione e le tue necessità</label>
+            <textarea name="Messaggio" required class="w-full px-6 py-4 rounded-[32px] bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Raccontaci brevemente di cosa si occupa l'associazione e che tipo di aiuto cerchi..." rows="5"></textarea>
+          </div>
+          <button class="w-full bg-primary text-on-primary font-label-bold text-label-bold px-10 py-5 rounded-full hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl mt-4" type="submit">
+            Invia richiesta tramite email
+          </button>
+        </form>
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <span class="brand-dot"></span>
-          <span class="brand-name">gemmaflow</span>
-        </div>
-        <nav class="footer-nav">
-          <a href="#prodotti">Prodotti</a>
-          <a href="#chi-siamo">Chi siamo</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="mailto:info@gemmaflow.it">Contatti</a>
-        </nav>
+  <!-- Footer -->
+  <footer class="bg-surface-container-low dark:bg-inverse-surface rounded-t-[40px] w-full border-t border-outline-variant/20 -mt-10 relative z-20">
+    <div class="max-w-7xl mx-auto px-margin-desktop py-12 flex flex-col md:flex-row justify-between items-center gap-gutter">
+      <div class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface mb-6 md:mb-0 flex items-center">
+        <!-- Logo grayscale in footer -->
+        <svg class="h-8 w-auto grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gemGradFoot" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M24 6L34 13V27L24 34L14 27V13L24 6Z" fill="none" stroke="url(#gemGradFoot)" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 24C12 24 18 18 24 20C30 22 36 16 36 16" stroke="#2563eb" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M34 14L36 16L34 18" stroke="#2563eb" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="48" y="28" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#0d1c2f" letter-spacing="-0.03em">gemmaflow</text>
+        </svg>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© <span id="year"></span> gemmaflow.it — Soluzioni digitali per associazioni italiane</p>
-        <p class="footer-legal">info@gemmaflow.it</p>
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors text-sm" href="privacy.html">Privacy Policy</a>
+        <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors text-sm" href="#prodotti">Prodotti</a>
+        <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors text-sm" href="#chi-siamo">Chi siamo</a>
+        <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors text-sm" href="mailto:info@gemmaflow.it">Contatti</a>
       </div>
+      <div class="font-body-md text-body-md text-on-surface-variant mt-6 md:mt-0 text-sm">© <span id="year"></span> gemmaflow.it — Realizzato con cura per il terzo settore.</div>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const burger = document.getElementById('navBurger');
-    const mobileNav = document.getElementById('navMobile');
-    burger.addEventListener('click', () => {
-      mobileNav.classList.toggle('open');
-      burger.classList.toggle('open');
-    });
-    mobileNav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileNav.classList.remove('open');
-        burger.classList.remove('open');
-      });
-    });
-
+    // Smooth scroll navigation
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        const href = a.getAttribute('href');
+        if (href !== "#") {
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
       });
-    });
-
-    const nav = document.querySelector('.nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
     });
   </script>
 </body>
