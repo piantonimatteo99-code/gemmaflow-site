@@ -281,32 +281,32 @@
     <div class="blob-bg bg-[#eff6ff] w-[400px] h-[400px] bottom-10 left-[-100px]"></div>
     <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
       <h2 class="font-headline-lg text-headline-lg text-on-surface mb-16">Esempi di interfacce gestionali</h2>
-      <div class="relative">
-        <div id="mockup-container" class="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 mt-12 pb-8 px-[calc(50%-128px)] md:px-0 md:overflow-visible md:justify-center md:items-center md:gap-12 md:pb-0" style="perspective: 1000px;">
+      <!-- Mobile carousel wrapper (JS sets height to 540px on mobile) -->
+      <div id="carousel-wrapper" class="relative mt-12 md:mt-0">
+        <!-- Cards container - flex on desktop, becomes block (JS-managed) on mobile -->
+        <div id="mockup-container" class="md:flex md:flex-row md:overflow-visible md:justify-center md:items-center md:gap-12 md:pb-0" style="perspective: 1000px;">
           <!-- Phone 1 (Dashboard) -->
-          <div class="phone-card w-64 h-[500px] bg-surface rounded-[50px] border-8 border-surface p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:-rotate-6 hover:rotate-0 hover:-translate-y-6 transition-all duration-500 flex-shrink-0 snap-center cursor-pointer">
+          <div class="phone-card w-64 h-[500px] bg-white rounded-[50px] border-8 border-white p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:-rotate-6 hover:rotate-0 hover:-translate-y-6 transition-all duration-500 cursor-pointer">
             <div class="w-full h-full bg-surface-container rounded-[36px] overflow-hidden">
               <img class="w-full h-full object-cover" src="screen1.png" alt="Screenshot reale dell'applicazione AC Chiari - Dashboard"/>
             </div>
           </div>
           <!-- Phone 2 (Calendario) -->
-          <div class="phone-card w-64 md:w-72 h-[500px] md:h-[550px] bg-surface rounded-[50px] border-8 border-surface p-2 shadow-2xl flex flex-col relative overflow-hidden z-10 transform md:hover:-translate-y-8 transition-all duration-500 flex-shrink-0 snap-center cursor-pointer">
+          <div class="phone-card w-64 md:w-72 h-[500px] md:h-[550px] bg-white rounded-[50px] border-8 border-white p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:hover:-translate-y-8 transition-all duration-500 cursor-pointer">
             <div class="w-full h-full bg-surface-container rounded-[36px] overflow-hidden">
               <img class="w-full h-full object-cover" src="screen2.png" alt="Screenshot reale dell'applicazione AC Chiari - Calendario"/>
             </div>
           </div>
           <!-- Phone 3 (Gestione Gruppi) -->
-          <div class="phone-card w-64 h-[500px] bg-surface rounded-[50px] border-8 border-surface p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:rotate-6 hover:rotate-0 hover:-translate-y-6 transition-all duration-500 flex-shrink-0 snap-center cursor-pointer">
+          <div class="phone-card w-64 h-[500px] bg-white rounded-[50px] border-8 border-white p-2 shadow-2xl flex flex-col relative overflow-hidden transform md:rotate-6 hover:rotate-0 hover:-translate-y-6 transition-all duration-500 cursor-pointer">
             <div class="w-full h-full bg-surface-container rounded-[36px] overflow-hidden">
               <img class="w-full h-full object-cover" src="screen3.png" alt="Screenshot reale dell'applicazione AC Chiari - Gestione Gruppi"/>
             </div>
           </div>
         </div>
-        <!-- Soft reflection shadow under the center phone (mobile only) -->
-        <div id="carousel-shadow" class="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 h-6 bg-black/10 rounded-full blur-lg pointer-events-none z-0 transition-all duration-500 md:hidden"></div>
         <!-- Fade-out side overlays for mobile carousel -->
-        <div class="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-white via-white/70 to-transparent pointer-events-none z-20 md:hidden"></div>
-        <div class="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white via-white/70 to-transparent pointer-events-none z-20 md:hidden"></div>
+        <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent pointer-events-none z-20 md:hidden"></div>
+        <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent pointer-events-none z-20 md:hidden"></div>
       </div>
     </div>
   </section>
@@ -504,77 +504,67 @@
     const mockupCards = mockupContainer.querySelectorAll('.phone-card');
     let currentIndex = 1; // Default to the middle card (index 1)
 
+    const carouselWrapper = document.getElementById('carousel-wrapper');
+
     function updateMockupCarousel() {
       const isMobile = window.innerWidth < 768;
       if (isMobile) {
-        // Set container style on mobile to override flex layout and pad shifts
-        mockupContainer.style.height = '540px';
-        mockupContainer.style.position = 'relative';
-        mockupContainer.style.overflow = 'hidden';
-        mockupContainer.style.display = 'block';
-        mockupContainer.style.paddingLeft = '0';
-        mockupContainer.style.paddingRight = '0';
+        // Wrapper becomes the positioning context
+        carouselWrapper.style.height = '540px';
+        carouselWrapper.style.overflow = 'hidden';
 
-        const containerWidth = mockupContainer.offsetWidth;
-        // Side offset: side cards are offset by 42% of container width, max 160px
-        const translateOffset = Math.min(160, containerWidth * 0.42);
+        // Container is just a transparent block — cards are positioned inside wrapper
+        mockupContainer.style.position = 'static';
+        mockupContainer.style.height = '100%';
+        mockupContainer.style.display = 'block';
+
+        const wrapperWidth = carouselWrapper.offsetWidth;
+        // Side cards offset: 42% of wrapper width
+        const translateOffset = Math.min(155, wrapperWidth * 0.42);
 
         mockupCards.forEach((card, index) => {
           let diff = index - currentIndex;
-          // Loop math for 3 cards: maps diff to range [-1, 1]
+          // Wrap diff to range [-1, 1] for 3 cards
           if (diff < -1) diff += 3;
           if (diff > 1) diff -= 3;
 
+          // Position each card absolutely inside the wrapper
           card.style.position = 'absolute';
           card.style.left = '50%';
           card.style.top = '50%';
           card.style.margin = '0';
+          card.style.flexShrink = '0';
 
-          let scale = 1;
-          let rotateY = 0;
-          let opacity = 1;
-          let zIndex = 30;
+          let scale, rotateY, opacity, zIndex;
 
           if (diff === 0) {
-            // Center card
-            scale = 1.0;
-            rotateY = 0;
-            opacity = 1.0;
-            zIndex = 30;
+            scale = 1.0; rotateY = 0; opacity = 1.0; zIndex = 30;
           } else if (diff === -1) {
-            // Left card
-            scale = 0.82;
-            rotateY = 20;
-            opacity = 0.65;
-            zIndex = 20;
-          } else if (diff === 1) {
-            // Right card
-            scale = 0.82;
-            rotateY = -20;
-            opacity = 0.65;
-            zIndex = 20;
+            scale = 0.8; rotateY = 18; opacity = 0.55; zIndex = 20;
+          } else {
+            scale = 0.8; rotateY = -18; opacity = 0.55; zIndex = 20;
           }
 
-          const translateX = diff * translateOffset;
-          card.style.transform = `translate(calc(-50% + ${translateX}px), -50%) scale(${scale}) rotateY(${rotateY}deg)`;
+          const tx = diff * translateOffset;
+          card.style.transform = `translate(calc(-50% + ${tx}px), -50%) scale(${scale}) rotateY(${rotateY}deg)`;
           card.style.zIndex = zIndex;
           card.style.opacity = opacity;
-          card.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease, z-index 0.4s';
+          card.style.transition = 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease';
         });
       } else {
-        // Reset container and card styles for desktop
-        mockupContainer.style.height = '';
+        // Desktop: reset everything
+        carouselWrapper.style.height = '';
+        carouselWrapper.style.overflow = '';
         mockupContainer.style.position = '';
-        mockupContainer.style.overflow = '';
+        mockupContainer.style.height = '';
         mockupContainer.style.display = '';
-        mockupContainer.style.paddingLeft = '';
-        mockupContainer.style.paddingRight = '';
-        
+
         mockupCards.forEach(card => {
           card.style.position = '';
           card.style.left = '';
           card.style.top = '';
           card.style.margin = '';
+          card.style.flexShrink = '';
           card.style.transform = '';
           card.style.zIndex = '';
           card.style.opacity = '';
