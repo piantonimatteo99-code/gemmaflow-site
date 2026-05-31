@@ -432,6 +432,8 @@
         
         <!-- Netlify or direct mail submit form -->
         <form id="contact-form" class="mt-10 max-w-xl mx-auto text-left space-y-6 bg-surface/5 p-6 md:p-10 rounded-3xl md:rounded-[60px] backdrop-blur-md border border-white/10 shadow-2xl">
+          <!-- Honeypot -->
+          <input type="text" name="_honey" style="display:none">
           <div>
             <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Nome e Cognome</label>
             <input name="Nome" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Il tuo nome" type="text"/>
@@ -444,8 +446,10 @@
             <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Descrivi la tua associazione e le tue necessità</label>
             <textarea name="Messaggio" required class="w-full px-6 py-4 rounded-[32px] bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Raccontaci brevemente di cosa si occupa l'associazione e che tipo di aiuto cerchi..." rows="5"></textarea>
           </div>
+          <!-- Alert status container -->
+          <div id="form-alert" class="hidden px-6 py-4 rounded-3xl text-center text-sm font-semibold border"></div>
           <button class="w-full bg-primary text-on-primary font-label-bold text-label-bold px-10 py-5 rounded-full hover:bg-primary/90 transition-all shadow-lg hover:shadow-xl mt-4" type="submit">
-            Invia richiesta tramite email
+            Invia richiesta
           </button>
         </form>
       </div>
@@ -618,21 +622,71 @@
     window.addEventListener('resize', updateMockupCarousel);
     updateMockupCarousel();
 
-    // Gestione invio modulo di contatto sicuro (evita avviso di connessione non sicura del browser)
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
+    // Gestione invio modulo di contatto sicuro e istantaneo tramite FormSubmit AJAX
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const formAlert = document.getElementById('form-alert');
+
+    contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Reset stato alert e pulsante
+      formAlert.classList.add('hidden');
+      formAlert.className = 'hidden px-6 py-4 rounded-3xl text-center text-sm font-semibold border';
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Invio in corso...';
+      
       const nome = this.querySelector('input[name="Nome"]').value;
       const email = this.querySelector('input[name="Email"]').value;
       const messaggio = this.querySelector('textarea[name="Messaggio"]').value;
+      const honey = this.querySelector('input[name="_honey"]').value;
       
-      const subject = encodeURIComponent("Richiesta informazioni gemmaflow.it - " + nome);
-      const body = encodeURIComponent(
-        "Nome e Cognome: " + nome + "\n" +
-        "Email di contatto: " + email + "\n\n" +
-        "Messaggio:\n" + messaggio
-      );
-      
-      window.location.href = `mailto:piantonimatteo.99@gmail.com?subject=${subject}&body=${body}`;
+      // Antispam silenzioso
+      if (honey) {
+        submitBtn.innerText = 'Invia richiesta';
+        submitBtn.disabled = false;
+        return;
+      }
+
+      const payload = {
+        Nome: nome,
+        Email: email,
+        Messaggio: messaggio,
+        _subject: "Nuovo contatto da gemmaflow.it: " + nome
+      };
+
+      fetch("https://formsubmit.co/ajax/piantonimatteo.99@gmail.com", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Errore di invio');
+        }
+      })
+      .then(data => {
+        // Successo
+        formAlert.classList.remove('hidden');
+        formAlert.classList.add('bg-emerald-500/20', 'text-emerald-300', 'border-emerald-500/30');
+        formAlert.innerText = 'Messaggio inviato con successo! Ti risponderemo al più presto.';
+        contactForm.reset();
+      })
+      .catch(error => {
+        // Errore
+        formAlert.classList.remove('hidden');
+        formAlert.classList.add('bg-rose-500/20', 'text-rose-300', 'border-rose-500/30');
+        formAlert.innerText = 'Si è verificato un errore durante l\'invio. Riprova più tardi.';
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Invia richiesta';
+      });
     });
   </script>
 </body>
