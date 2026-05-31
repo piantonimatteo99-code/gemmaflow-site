@@ -103,7 +103,7 @@
     }
   </script>
   <style>
-    body { background-color: #f8f9ff; }
+    body { background-color: #ffffff; }
     .blob-bg {
         position: absolute;
         z-index: -1;
@@ -276,7 +276,7 @@
   </div>
 
   <!-- Visual Mockups Showcase -->
-  <section class="py-section-padding relative overflow-hidden bg-[#f8f9ff]">
+  <section class="py-section-padding relative overflow-hidden bg-gradient-to-b from-[#f8f9ff] to-white">
     <div class="blob-bg bg-[#fefce8] w-[600px] h-[600px] top-1/4 right-[-200px]"></div>
     <div class="blob-bg bg-[#eff6ff] w-[400px] h-[400px] bottom-10 left-[-100px]"></div>
     <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop relative z-10 text-center">
@@ -305,15 +305,15 @@
         <!-- Soft reflection shadow under the center phone (mobile only) -->
         <div id="carousel-shadow" class="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 h-6 bg-black/10 rounded-full blur-lg pointer-events-none z-0 transition-all duration-500 md:hidden"></div>
         <!-- Fade-out side overlays for mobile carousel -->
-        <div class="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-[#f8f9ff] via-[#f8f9ff]/70 to-transparent pointer-events-none z-20 md:hidden"></div>
-        <div class="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-[#f8f9ff] via-[#f8f9ff]/70 to-transparent pointer-events-none z-20 md:hidden"></div>
+        <div class="absolute top-0 left-0 h-full w-12 bg-gradient-to-r from-white via-white/70 to-transparent pointer-events-none z-20 md:hidden"></div>
+        <div class="absolute top-0 right-0 h-full w-12 bg-gradient-to-l from-white via-white/70 to-transparent pointer-events-none z-20 md:hidden"></div>
       </div>
     </div>
   </section>
   <!-- Wave: Mockups → Vantaggi -->
-  <div class="wave-divider">
+  <div class="wave-divider bg-white">
     <svg viewBox="0 0 1440 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,70 C240,140 480,0 720,70 C960,140 1200,0 1440,70 L1440,0 L0,0 Z" fill="#f8f9ff"/>
+      <path d="M0,70 C240,140 480,0 720,70 C960,140 1200,0 1440,70 L1440,140 L0,140 Z" fill="#ffffff"/>
     </svg>
   </div>
 
@@ -507,14 +507,17 @@
     function updateMockupCarousel() {
       const isMobile = window.innerWidth < 768;
       if (isMobile) {
-        // Set container style on mobile
+        // Set container style on mobile to override flex layout and pad shifts
         mockupContainer.style.height = '540px';
         mockupContainer.style.position = 'relative';
         mockupContainer.style.overflow = 'hidden';
+        mockupContainer.style.display = 'block';
+        mockupContainer.style.paddingLeft = '0';
+        mockupContainer.style.paddingRight = '0';
 
         const containerWidth = mockupContainer.offsetWidth;
-        // Side offset: side cards are offset by 38% of container width, max 160px
-        const translateOffset = Math.min(160, containerWidth * 0.38);
+        // Side offset: side cards are offset by 42% of container width, max 160px
+        const translateOffset = Math.min(160, containerWidth * 0.42);
 
         mockupCards.forEach((card, index) => {
           let diff = index - currentIndex;
@@ -540,15 +543,15 @@
             zIndex = 30;
           } else if (diff === -1) {
             // Left card
-            scale = 0.8;
+            scale = 0.82;
             rotateY = 20;
-            opacity = 0.6;
+            opacity = 0.65;
             zIndex = 20;
           } else if (diff === 1) {
             // Right card
-            scale = 0.8;
+            scale = 0.82;
             rotateY = -20;
-            opacity = 0.6;
+            opacity = 0.65;
             zIndex = 20;
           }
 
@@ -563,6 +566,9 @@
         mockupContainer.style.height = '';
         mockupContainer.style.position = '';
         mockupContainer.style.overflow = '';
+        mockupContainer.style.display = '';
+        mockupContainer.style.paddingLeft = '';
+        mockupContainer.style.paddingRight = '';
         
         mockupCards.forEach(card => {
           card.style.position = '';
