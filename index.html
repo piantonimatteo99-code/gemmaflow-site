@@ -430,24 +430,21 @@
           Inizia a far fiorire la tua associazione
         </h2>
         
-        <!-- Iframe nascosto per gestire l'invio sicuro senza ricaricare la pagina o mostrare avvisi -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-        <!-- Form configurato con target all'iframe nascosto per evitare CORS e reindirizzamenti -->
-        <form id="contact-form" action="https://formsubmit.co/piantonimatteo.99@gmail.com" method="POST" target="hidden_iframe" class="mt-10 max-w-xl mx-auto text-left space-y-6 bg-surface/5 p-6 md:p-10 rounded-3xl md:rounded-[60px] backdrop-blur-md border border-white/10 shadow-2xl">
-          <!-- Honeypot -->
-          <input type="text" name="_honey" style="display:none">
+        <!-- Form di contatto - invia tramite endpoint Firebase su ac-chiari -->
+        <form id="contact-form" class="mt-10 max-w-xl mx-auto text-left space-y-6 bg-surface/5 p-6 md:p-10 rounded-3xl md:rounded-[60px] backdrop-blur-md border border-white/10 shadow-2xl">
+          <!-- Honeypot antispam -->
+          <input type="text" name="_honey" style="display:none;" tabindex="-1" autocomplete="off">
           <div>
             <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Nome e Cognome</label>
-            <input name="Nome" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Il tuo nome" type="text"/>
+            <input name="name" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Il tuo nome" type="text"/>
           </div>
           <div>
             <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Indirizzo Email</label>
-            <input name="Email" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="latua@email.com" type="email"/>
+            <input name="email" required class="w-full px-6 py-4 rounded-full bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="latua@email.com" type="email"/>
           </div>
           <div>
-            <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Descrivi la tua associazione e le tue necessità</label>
-            <textarea name="Messaggio" required class="w-full px-6 py-4 rounded-[32px] bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Raccontaci brevemente di cosa si occupa l'associazione e che tipo di aiuto cerchi..." rows="5"></textarea>
+            <label class="block font-label-bold text-label-bold text-inverse-on-surface mb-3 ml-2 text-sm">Descrivi la tua realtà e le tue necessità</label>
+            <textarea name="message" required class="w-full px-6 py-4 rounded-[32px] bg-white/10 border border-white/20 text-inverse-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all placeholder:text-white/40" placeholder="Raccontaci brevemente di cosa ti occupi e che tipo di aiuto cerchi..." rows="5"></textarea>
           </div>
           <!-- Alert status container -->
           <div id="form-alert" class="hidden px-6 py-4 rounded-3xl text-center text-sm font-semibold border"></div>
@@ -625,39 +622,58 @@
     window.addEventListener('resize', updateMockupCarousel);
     updateMockupCarousel();
 
-    // Gestione invio modulo di contatto sicuro e istantaneo tramite target iframe (evita CORS e avvisi di sicurezza)
+    // Gestione invio modulo — endpoint Firebase su infrastruttura ac-chiari
     const contactForm = document.getElementById('contact-form');
     const submitBtn = contactForm.querySelector('button[type="submit"]');
     const formAlert = document.getElementById('form-alert');
 
-    contactForm.addEventListener('submit', function(e) {
-      // NON usiamo e.preventDefault() per permettere l'invio naturale all'iframe nascosto
-      
-      // Reset stato alert e pulsante
-      formAlert.classList.add('hidden');
+    const CONTACT_ENDPOINT = 'https://studio--ac-chiari-import-2024.us-central1.hosted.app/api/gemmaflow-contact';
+
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Reset UI
       formAlert.className = 'hidden px-6 py-4 rounded-3xl text-center text-sm font-semibold border';
       submitBtn.disabled = true;
       submitBtn.innerText = 'Invio in corso...';
-      
+
+      // Honeypot antispam
       const honey = this.querySelector('input[name="_honey"]').value;
       if (honey) {
-        e.preventDefault(); // Blocca se è spam
-        submitBtn.innerText = 'Invia richiesta';
         submitBtn.disabled = false;
+        submitBtn.innerText = 'Invia richiesta';
         return;
       }
 
-      // Mostriamo il messaggio di successo al volo
-      formAlert.classList.remove('hidden');
-      formAlert.className = 'px-6 py-4 rounded-3xl text-center text-sm font-semibold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-      formAlert.innerText = 'Messaggio inviato con successo! Ti risponderemo al più presto.';
+      const name = this.querySelector('input[name="name"]').value.trim();
+      const email = this.querySelector('input[name="email"]').value.trim();
+      const message = this.querySelector('textarea[name="message"]').value.trim();
 
-      // Ripristiniamo il modulo e il pulsante dopo un breve ritardo per consentire l'invio dell'iframe
-      setTimeout(() => {
-        contactForm.reset();
+      try {
+        const response = await fetch(CONTACT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message })
+        });
+
+        if (!response.ok) throw new Error('Risposta server non valida (' + response.status + ')');
+        const result = await response.json();
+
+        if (result.success) {
+          formAlert.className = 'px-6 py-4 rounded-3xl text-center text-sm font-semibold border bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+          formAlert.innerText = 'Messaggio inviato con successo! Ti risponderemo al più presto.';
+          contactForm.reset();
+        } else {
+          throw new Error(result.error || 'Errore sconosciuto');
+        }
+      } catch (err) {
+        formAlert.className = 'px-6 py-4 rounded-3xl text-center text-sm font-semibold border bg-rose-500/20 text-rose-300 border-rose-500/30';
+        formAlert.innerText = 'Errore durante l\'invio. Riprova più tardi o scrivici a piantonimatteo.99@gmail.com';
+        console.error('[contact-form]', err);
+      } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = 'Invia richiesta';
-      }, 1000);
+      }
     });
   </script>
 </body>
